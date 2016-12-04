@@ -1,5 +1,16 @@
 module Spree
   class CurrencyController < StoreController
+    def get
+      @currencies = supported_currencies
+      
+      respond_to do |format|
+        format.json { render json: @currencies }
+        format.html do
+          redirect_back_or_default(root_path)
+        end
+      end
+    end
+
     def set
       @currency = supported_currencies.find { |currency| currency.iso_code == params[:currency] }
       # Make sure that we update the current order, so the currency change is reflected.
