@@ -4,7 +4,7 @@ module Spree
       @currencies = supported_currencies
 
       respond_to do |format|
-        format.json { render json: @currencies, serializer: Spree::CurrencySerializer }
+        format.json { render json: @currencies }
         format.html do
           redirect_back_or_default(root_path)
         end
