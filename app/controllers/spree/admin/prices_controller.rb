@@ -7,6 +7,9 @@ module Spree
         params[:vp].each do |variant_id, prices|
           variant = Spree::Variant.find(variant_id)
           next unless variant
+
+          # Fix prices downcased key. It's upcase in view but downcased after using params. Need to figure out why later
+          prices.keys.each { |k| prices[k.upcase] = prices[k]; prices.delete(k) }
           supported_currencies.each do |currency|
             price = variant.price_in(currency.iso_code)
             price.price = (prices[currency.iso_code].blank? ? nil : prices[currency.iso_code].to_money)
