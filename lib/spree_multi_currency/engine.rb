@@ -17,6 +17,15 @@ module SpreeMultiCurrency
       
     end
 
-    config.to_prepare(&method(:activate).to_proc)
+    initializer 'spree.promo.register.promotions.rules' do |app|
+      app.config.spree.promotions.rules << Spree::Promotion::Rules::Store
+    end
+    
+    initializer 'spree.register.calculators' do |app|
+      app.config.spree.calculators.shipping_methods << Spree::Calculator::Shipping::MultipleCurrencyFlatRate
+      app.config.spree.calculators.tax_rates << Spree::Calculator::MultipleCurrencyFlatRate
+      app.config.spree.calculators.promotion_actions_create_adjustments << Spree::Calculator::MultipleCurrencyFlatRate
+    end
+    
   end
 end
