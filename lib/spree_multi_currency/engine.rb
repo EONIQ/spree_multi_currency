@@ -17,9 +17,7 @@ module SpreeMultiCurrency
       
     end
 
-    initializer 'spree.promo.register.promotions.rules' do |app|
-      app.config.spree.promotions.rules << Spree::Promotion::Rules::Store
-    end
+    config.to_prepare(&method(:activate).to_proc)
     
     initializer 'spree.register.calculators' do |app|
       app.config.spree.calculators.shipping_methods << Spree::Calculator::Shipping::MultipleCurrencyFlatRate
