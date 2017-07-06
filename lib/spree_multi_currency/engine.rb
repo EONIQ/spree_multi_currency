@@ -25,5 +25,8 @@ module SpreeMultiCurrency
       app.config.spree.calculators.promotion_actions_create_adjustments << Spree::Calculator::MultipleCurrencyFlatRate
     end
     
+    initializer 'spree.promo.register.promotions.rules' do |app|
+      app.config.spree.promotions.rules << Spree::Promotion::Rules::ItemTotalByCurrency
+    end
   end
 end

@@ -16,3 +16,10 @@ en:
     variant_prices_search_placeholder: Search for SKU or variant name...
     notice_messages:
       prices_saved: Prices successfully saved
+    promotion_rule_types:
+      item_total_by_currency: 
+        name: Item Total By Currency
+        description: Order total meets these criteria by currency
+    item_total_rule:
+      operators:
+        na: not applicable
