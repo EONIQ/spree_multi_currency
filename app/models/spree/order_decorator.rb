@@ -11,6 +11,10 @@ Spree::Order.class_eval do
   	Spree::Store.current_store ? Spree::Store.current_store.default_currency : nil || Spree::Config[:currency]
   end
 
+  def set_currency
+    self.currency = currency_default if self[:currency].nil?
+  end
+
   def currency_default
     self.class.currency_default
   end
