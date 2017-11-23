@@ -24,7 +24,9 @@ Spree::Order.class_eval do
   end
 
   def update_promotion_currencies
-    adjustments.collect(&:open!)
+    adjustments.each do |adjustment|
+      adjustment.open! if adjustment.state != 'open'
+    end
     adjustments.collect(&:update!)
   end
 
