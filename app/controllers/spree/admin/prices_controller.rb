@@ -1,8 +1,13 @@
 module Spree
   module Admin
     class PricesController < ResourceController
-      belongs_to 'spree/product', find_by: :slug
+      # belongs_to 'spree/product', find_by: :slug
+      before_action :load_data
 
+      def load_data
+        @product = Spree::Product.friendly.find(params[:product_id])
+      end
+      
       def create
         params.require(:vp).permit!
         params[:vp].each do |variant_id, prices|
